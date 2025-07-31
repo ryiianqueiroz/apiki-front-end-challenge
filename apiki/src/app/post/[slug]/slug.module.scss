@@ -1,6 +1,9 @@
 .container{
     position: relative;
     height: max-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .blackBG{
@@ -24,7 +27,7 @@
 .slug{
     display: flex;
     max-width: 1000px;
-    margin: auto;
+    margin: 0% 3% 2% 3%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -44,7 +47,9 @@
 }
 
 .contentSlug{
-    margin: 8% 4% 7% 4%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 
     h2{
         margin-top: 5%;
@@ -55,11 +60,36 @@
         line-height: 1.5rem;
     }
 
+    figure{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1rem;
+
+        img{
+            width: 600px;
+            height: 400px;
+            object-fit: contain;
+            margin: auto;
+        }
+    }
+
 }
 
 @media screen and (max-width: 768px) {
-    .contentSlug, .title{
-        margin: 8% 5% 5% 5%;
+    .slug, .title{
+        margin: 0% 5% 2% 5%;
+    }
+
+    .contentSlug{
+        figure{
+            font-size: 0.5rem;
+            
+            img{
+                width: 300px;
+                height: 200px;
+            }
+        }
     }
 }
 
@@ -70,5 +100,20 @@
 
     .image_card{
         max-height: 250px;
+    }
+
+    .slug{
+        margin: 0% 5% 2% 5%;
+    }
+
+    .contentSlug{
+        figure{
+            font-size: 0.3rem;
+
+            img{
+                width: 150px;
+                height: 100px;
+            }
+        }
     }
 }
