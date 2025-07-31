@@ -1,25 +1,34 @@
 'use client';
 
+import { getPostsPorPag } from '@/services/api';
 import { useState, useEffect } from 'react';
+import Posts from '../components/homepage/PostCard';
+import styles from "./home.module.scss"
 
-export default function Weather() {
-  const [forecast, setForecast] = useState(null);
+export default function Home() {
+  const [posts, setPosts] = useState([])  
+  const [page, setPage] = useState(1);         
+
+  const carregarMaisPosts = async () => {
+      try {
+        const postsData = await getPostsPorPag(page);
+        setPosts(prev => [...prev, ...postsData]);
+        setPage(prev => prev + 1);
+      } catch (error) {
+        console.log(error)
+      }
+  }
 
   useEffect(() => {
-    async function fetchWeather() {
-      const res = await fetch('https://blog.apiki.com/wp-json/wp/v2/');
-      const data = await res.json();
-      setForecast(data);
-    }
-    fetchWeather();
-  }, []);
-
-  if (!forecast) return <div>Loading...</div>;
+    carregarMaisPosts();
+  }, [])
 
   return (
-    <div>
-      <h2>Current Weatherwewe wewe</h2>
-      <p>{forecast.namespace}</p>
+    <div className={styles.homePage}>
+      <Posts posts={posts}/>
+      <div>
+        <button onClick={() => carregarMaisPosts()} className={styles.buttonLoad}>CARREGAR MAIS</button>
+      </div>
     </div>
   );
 }
